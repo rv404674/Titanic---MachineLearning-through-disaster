@@ -1,33 +1,28 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib import style
-style.use('fivethirtyeight')
-
 import pandas as pd
-web_stats={ 'Day':[1,2,3,4,5,6],'Visitors':[43,34,65,56,29,76],
-             'Bounce_Rate':[65,67,78,65,45,52] }
-df=pd.DataFrame(web_stats)
+df=pd.read_csv('ZILLOW-Z77006_ZRIMFRR.csv')
+print df.head()
 
-#print (df.head())
-#print (df.tail(2))
+df.set_index('Date',inplace=True)
+df.to_csv('newcsv2.csv')
 
-#df=df.set_index('Day')
-df.set_index('Day',inplace=True)
-#print df
+df=pd.read_csv('newcsv2.csv')
+print df.head()
 
-#print (df.Visitors)
-#print (df['Visitors'])
+df=pd.read_csv('newcsv2.csv',index_col=0)
+print df.head()
 
+df.columns=['Austin_HPI']
+print df.head()
 
-#df['Visitors'].plot()
-#plt.show()
+df.to_csv('newcsv3.csv')
+df.to_csv('newcsv4.csv',header=False)
+df=pd.read_csv('newcsv4.csv',names=['Date','Austin_HPI'],index_col=0)
+print df.head()
 
-#df.plot()
-#plt.show()
+df.to_html('example.html')
+df=pd.read_csv('newcsv4.csv',names=['Date','Austin_HPI'])
+print df.head()
 
-#print(df[['Visitors','Bounce_Rate']])
-print (df['Visitors'].tolist())
-print (df[['Visitors',
-
-
+df.rename(columns={'Austin_HPI':'7700_HPI'},inplace=True)
+print df.head()
 
