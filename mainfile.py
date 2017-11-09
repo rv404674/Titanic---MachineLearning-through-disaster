@@ -1,28 +1,27 @@
 import pandas as pd
-df=pd.read_csv('ZILLOW-Z77006_ZRIMFRR.csv')
-print df.head()
 
-df.set_index('Date',inplace=True)
-df.to_csv('newcsv2.csv')
+df1 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2001, 2002, 2003, 2004])
 
-df=pd.read_csv('newcsv2.csv')
-print df.head()
+df2 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2005, 2006, 2007, 2008])
 
-df=pd.read_csv('newcsv2.csv',index_col=0)
-print df.head()
+df3 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'Low_tier_HPI':[50, 52, 50, 53]},
+                   index = [2001, 2002, 2003, 2004])
 
-df.columns=['Austin_HPI']
-print df.head()
+concat=pd.concat([df1,df2])
+print concat
 
-df.to_csv('newcsv3.csv')
-df.to_csv('newcsv4.csv',header=False)
-df=pd.read_csv('newcsv4.csv',names=['Date','Austin_HPI'],index_col=0)
-print df.head()
+concat=pd.concat([df1,df2,df3])
+print concat
 
-df.to_html('example.html')
-df=pd.read_csv('newcsv4.csv',names=['Date','Austin_HPI'])
-print df.head()
-
-df.rename(columns={'Austin_HPI':'7700_HPI'},inplace=True)
-print df.head()
+s=pd.Series((80,20,50),index=['HPI','Int_rate','US_GDP_Thousands'])
+df4=df1.append(s,ignore_index=True)
+print df4
 
